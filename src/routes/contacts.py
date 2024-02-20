@@ -19,6 +19,11 @@ async def read_contacts(db: Session = Depends(get_db)):
     contacts = await repository_contacts.get_contacts_got_birthday(db)
     return contacts
 
+@router.get("/search/", response_model=List[ContactResponse])
+async def read_contacts(search_by: str, db: Session = Depends(get_db)):
+    contacts = await repository_contacts.get_contacts_with_string(search_by,db)
+    return contacts
+
 @router.get("/{contact_id}", response_model=ContactResponse)
 async def read_contact(contact_id: int, db: Session = Depends(get_db)):
     contact = await repository_contacts.get_contact(contact_id, db)

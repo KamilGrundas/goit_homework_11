@@ -36,6 +36,14 @@ async def get_contacts_got_birthday(db: Session) -> List[Contact]:
             (days_in_this_month - extract('day', Contact.born_date) <= next_week.day))
         ).all()
 
+async def get_contacts_with_string(search_by: str, db: Session) -> List[Contact]:
+    return db.query(Contact).filter(
+        (
+            Contact.forename.ilike(f"%{search_by}%") |
+            Contact.surname.ilike(f"%{search_by}%") |
+            Contact.email.ilike(f"%{search_by}%")
+        )
+    ).all()
 
 
 async def create_contact(body: ContactResponse, db: Session) -> Contact:

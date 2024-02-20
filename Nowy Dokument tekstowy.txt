@@ -1,3 +1,0 @@
-cd C:\Users\kamil\Desktop\goit_homework_11
-C:\Users\kamil\Desktop\goit_homework_11\venv\Scripts\activate
-uvicorn main:app --host localhost --port 8000 --reload
