@@ -13,3 +13,11 @@ class Contact(Base):
     email = Column(String(50))
     phone_number = Column(String(20), nullable=False)
     born_date = Column(Date)
+
+class User(Base):
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50), nullable=False, unique=True)
+    email = Column(String(250), nullable=False, unique=True)
+    password = Column(String(255), nullable=False)
+    refresh_token = Column(String(255), nullable=True)
+

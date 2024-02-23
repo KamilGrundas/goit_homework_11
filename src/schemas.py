@@ -16,3 +16,8 @@ class ContactResponse(ContactBase):
     class Config:
         orm_mode = True
 
+class UserBase(BaseModel):
+    username: str = Field(max_length=50)
+    email: str = Field(max_length=250)
+    password: str = Field(min_length=8, max_length=16)
+
