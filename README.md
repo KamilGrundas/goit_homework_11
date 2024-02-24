@@ -57,3 +57,25 @@ In this homework assignment, we continue working on the RESTful API application 
 - If the user does not exist or the password is incorrect, the system returns an HTTP 401 Unauthorized error;
 - The authorization mechanism is implemented using a pair of JWT tokens: an access token (`access_token`) and a refresh token (`refresh_token`).
 
+<br>
+
+<br>
+
+# Homework #13
+
+## Part One
+In this homework assignment, we continue to enhance the application based on the REST API from the previous homework assignment.
+
+## Tasks
+- Implement a mechanism to verify the email address of the registered user;
+- Limit the number of requests to the contacts routes. Remember to limit the maximum number of contacts created by one user in a specified timeframe;
+- Enable CORS for the REST API;
+- Implement functionality allowing the update of the user's avatar. Use Cloudinary for this purpose;
+
+## General Requirements
+- All environment variables should be stored in an `.env` file. The code should not contain any sensitive data;
+- Docker Compose is used to run services and databases.
+
+## Additional Tasks
+- Implement caching mechanism using Redis. Perform caching of the current user during authorization;
+- Implement a password reset mechanism for the REST API based application.
