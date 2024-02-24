@@ -35,9 +35,9 @@ In addition to basic functionality, the CRUD API should also have the following 
 - Provision of documentation for the API.
 - Use of the Pydantic data validation module.
 
+<br>
 
-
-
+<br>
 
 # Homework #12
 
