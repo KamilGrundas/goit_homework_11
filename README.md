@@ -79,3 +79,10 @@ In this homework assignment, we continue to enhance the application based on the
 ## Additional Tasks
 - Implement caching mechanism using Redis. Perform caching of the current user during authorization;
 - Implement a password reset mechanism for the REST API based application.
+
+## Part Two
+Your task is to refine the Django application from Homework №10.
+
+## Tasks
+- Implement a password reset mechanism for registered users;
+- All environment variables used in settings.py should be stored in an .env file.
