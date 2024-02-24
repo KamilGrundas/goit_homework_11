@@ -81,7 +81,7 @@ In this homework assignment, we continue to enhance the application based on the
 - Implement a password reset mechanism for the REST API based application.
 
 ## Part Two
-Your task is to refine the Django application from Homework №10.
+Your task is to refine the Django application from Homework #10.
 
 ## Tasks
 - Implement a password reset mechanism for registered users;
