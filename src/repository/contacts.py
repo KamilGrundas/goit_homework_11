@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import extract
 import calendar
 
+
 def days_in_month(year: int, month: int) -> int:
     """
     Returns the number of days in a given month of a specific year.
@@ -25,6 +26,7 @@ def days_in_month(year: int, month: int) -> int:
     """
     return calendar.monthrange(year, month)[1]
 
+
 async def get_contacts(user: User, db: Session) -> List[Contact]:
     """
     Retrieves a list of contacts for a specific user.
@@ -37,6 +39,7 @@ async def get_contacts(user: User, db: Session) -> List[Contact]:
     :rtype: List[Contact]
     """
     return db.query(Contact).filter(Contact.user_id == user.id).all()
+
 
 async def get_contact(contact_id: int, user: User, db: Session) -> Contact:
     """
@@ -56,6 +59,7 @@ async def get_contact(contact_id: int, user: User, db: Session) -> Contact:
         .filter(and_(Contact.user_id == user.id, Contact.id == contact_id))
         .first()
     )
+
 
 async def get_contacts_got_birthday(user: User, db: Session) -> List[Contact]:
     """
@@ -81,14 +85,17 @@ async def get_contacts_got_birthday(user: User, db: Session) -> List[Contact]:
                         extract("day", Contact.born_date) >= today.day,
                         or_(
                             and_(
-                                extract("month", Contact.born_date) == extract("month", next_week),
+                                extract("month", Contact.born_date)
+                                == extract("month", next_week),
                                 extract("day", Contact.born_date) <= next_week.day,
                             ),
-                            extract("month", Contact.born_date) != extract("month", next_week),
+                            extract("month", Contact.born_date)
+                            != extract("month", next_week),
                         ),
                     ),
                     and_(
-                        extract("month", Contact.born_date) == extract("month", next_week),
+                        extract("month", Contact.born_date)
+                        == extract("month", next_week),
                         extract("day", Contact.born_date) <= next_week.day,
                     ),
                 ),
@@ -98,7 +105,10 @@ async def get_contacts_got_birthday(user: User, db: Session) -> List[Contact]:
         .all()
     )
 
-async def get_contacts_with_string(search_by: str, user: User, db: Session) -> List[Contact]:
+
+async def get_contacts_with_string(
+    search_by: str, user: User, db: Session
+) -> List[Contact]:
     """
     Retrieves a list of contacts for a specific user that match a search string in their name or email.
 
@@ -126,6 +136,7 @@ async def get_contacts_with_string(search_by: str, user: User, db: Session) -> L
         .all()
     )
 
+
 async def create_contact(body: ContactResponse, user: User, db: Session) -> Contact:
     """
     Creates a new contact for a specific user.
@@ -152,6 +163,7 @@ async def create_contact(body: ContactResponse, user: User, db: Session) -> Cont
     db.refresh(contact)
     return contact
 
+
 async def remove_contact(contact_id: int, user: User, db: Session) -> Contact | None:
     """
     Removes a single contact with the specified ID for a specific user.
@@ -175,7 +187,10 @@ async def remove_contact(contact_id: int, user: User, db: Session) -> Contact | 
         db.commit()
     return contact
 
-async def update_contact(contact_id: int, body: ContactResponse, user: User, db: Session) -> Contact | None:
+
+async def update_contact(
+    contact_id: int, body: ContactResponse, user: User, db: Session
+) -> Contact | None:
     """
     Updates a single contact with the specified ID for a specific user.
 
@@ -204,4 +219,3 @@ async def update_contact(contact_id: int, body: ContactResponse, user: User, db:
 
         db.commit()
     return contact
-

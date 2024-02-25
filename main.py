@@ -8,9 +8,7 @@ from fastapi_limiter.depends import RateLimiter
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000"
-    ]
+origins = ["http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,12 +21,16 @@ app.add_middleware(
 
 app.include_router(contacts.router, prefix="/api")
 app.include_router(auth.router, prefix="/api")
-app.include_router(users.router, prefix='/api')
+app.include_router(users.router, prefix="/api")
+
 
 @app.on_event("startup")
 async def startup():
-    r = await redis.Redis(host='localhost', port=6379, db=0, encoding="utf-8", decode_responses=True)
+    r = await redis.Redis(
+        host="localhost", port=6379, db=0, encoding="utf-8", decode_responses=True
+    )
     await FastAPILimiter.init(r)
+
 
 @app.get("/", dependencies=[Depends(RateLimiter(times=2, seconds=5))])
 async def index():

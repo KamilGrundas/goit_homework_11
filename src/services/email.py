@@ -5,7 +5,6 @@ from fastapi_mail.errors import ConnectionErrors
 from pydantic import EmailStr
 
 from src.services.auth import auth_service
-
 from src.conf.config import settings
 
 conf = ConnectionConfig(
@@ -19,16 +18,23 @@ conf = ConnectionConfig(
     MAIL_SSL_TLS=True,
     USE_CREDENTIALS=True,
     VALIDATE_CERTS=True,
-    TEMPLATE_FOLDER=Path(__file__).parent / 'templates',
+    TEMPLATE_FOLDER=Path(__file__).parent / "templates",
 )
 
 
-
 async def send_email(email: EmailStr, username: str, host: str):
+    """
+    Asynchronicznie wysyła e-mail z linkiem do weryfikacji adresu e-mail użytkownika.
+
+    :param email: Adres e-mail, na który wysyłana jest wiadomość.
+    :param username: Nazwa użytkownika, która będzie wykorzystana w treści e-maila.
+    :param host: Host, który będzie wykorzystany do stworzenia linku weryfikacyjnego.
+    """
     try:
         token_verification = auth_service.create_email_token({"sub": email})
+
         message = MessageSchema(
-            subject="Confirm your email ",
+            subject="Confirm your email",
             recipients=[email],
             template_body={
                 "host": host,
@@ -39,6 +45,7 @@ async def send_email(email: EmailStr, username: str, host: str):
         )
 
         fm = FastMail(conf)
+
         await fm.send_message(message, template_name="email_template.html")
     except ConnectionErrors as err:
         print(err)
