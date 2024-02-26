@@ -86,3 +86,15 @@ Your task is to refine the Django application from Homework #10.
 ## Tasks
 - Implement a password reset mechanism for registered users;
 - All environment variables used in settings.py should be stored in an .env file.
+
+<br>
+
+<br>
+
+# Homework #14
+In this homework assignment, we continue to refine our REST API application from Homework #13.
+
+## Task
+ - Use Sphinx to create documentation for your homework assignment. To do this, add docstrings to the necessary functions and class methods in the main modules.
+ - Cover the homework repository modules with unit tests using the Unittest framework. Use the example from the outline of the module tests/test_unit_repository_notes.py as a basis.
+ - Cover any chosen path from the homework assignment with functional tests using the pytest framework.
