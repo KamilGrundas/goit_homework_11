@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Quotes</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+</head>
+<body>
+<main class="container">
+    <header class="flex justify-between">
+        <h1><a href="/" class="no-style">Main page</a></h1>
+
+        {% if request.path == "/" %}
+            <div>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'quotes:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="button">Logout</button>
+                    </form>
+                    <a href="{% url 'quotes:add_quote' %}" class="button" style="margin-left: 10px;">Add quote</a>
+                    <a href="{% url 'quotes:create_author' %}" class="button" style="margin-left: 10px;">Add author</a>
+                {% else %}
+                    <a href="{% url 'quotes:user_login' %}" class="button">Login</a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </header>
+    {% block content %} {% endblock %}
+</main>
+</body>
+</html>
+
+

@@ -1,0 +1,24 @@
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+<h1>Login</h1>
+<form method="post" action="{% url 'quotes:user_login' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username" required class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="id_password">Password:</label>
+        <input type="password" name="password" id="id_password" required class="form-control">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="button primary">Login</button>
+    </div>
+    {% if form.errors %}
+        <p class="text-error">Your username and/or password didn't match. Please try again.</p>
+    {% endif %}
+</form>
+<p>You do not have an account? <a href="{% url 'quotes:register' %}">Register.</a></p>
+<p>Forgot password? <a href="{% url 'quotes:password_reset' %}">Reset password.</a></p>
+{% endblock %}

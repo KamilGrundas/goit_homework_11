@@ -1,0 +1,14 @@
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+    <h2>Utwórz autora</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Zapisz</button>
+    </form>
+    <form action="{% url 'quotes:load_authors' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="button">Load authors data</button>
+    </form>
+{% endblock %}
